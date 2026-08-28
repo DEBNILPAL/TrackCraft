@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ShieldCheck, LogIn, UserPlus } from 'lucide-react';
+import { LogIn, UserPlus } from 'lucide-react';
 import { Hero } from '../components/landing/Hero';
 import { Features } from '../components/landing/Features';
 import { HowItWorks } from '../components/landing/HowItWorks';
@@ -13,9 +13,11 @@ export const LandingPage: React.FC = () => {
       {/* Landing Navbar */}
       <header className="sticky top-0 z-40 h-20 bg-slate-950/80 backdrop-blur-xl border-b border-slate-800/80 px-4 sm:px-8 flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-indigo-600 to-purple-500 flex items-center justify-center font-bold text-white shadow-glow">
-            <ShieldCheck className="w-6 h-6" />
-          </div>
+          <img
+            src="/app-icon.png"
+            alt="TrackCraft Logo"
+            className="w-10 h-10 rounded-2xl border border-indigo-500/40 shadow-glow object-cover"
+          />
           <span className="text-xl font-black tracking-tight text-white">
             TrackCraft
           </span>

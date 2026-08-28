@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Bell, Menu, LogOut, User as UserIcon, ShieldCheck } from 'lucide-react';
+import { Bell, Menu, LogOut, User as UserIcon } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { Avatar } from '../common/Avatar';
 import { NotificationDropdown } from '../notifications/NotificationDropdown';
@@ -35,7 +35,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onToggleSidebar }) => {
 
   return (
     <header className="sticky top-0 z-30 h-16 bg-slate-950/80 backdrop-blur-xl border-b border-slate-800/80 px-4 lg:px-8 flex items-center justify-between">
-      {/* Left: Mobile Sidebar Trigger & Branding */}
+      {/* Left: Mobile Sidebar Trigger & Branding with App Icon */}
       <div className="flex items-center gap-4">
         <button
           onClick={onToggleSidebar}
@@ -44,10 +44,12 @@ export const Navbar: React.FC<NavbarProps> = ({ onToggleSidebar }) => {
           <Menu className="w-6 h-6" />
         </button>
 
-        <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-indigo-600 to-purple-500 flex items-center justify-center font-bold text-white shadow-glow">
-            <ShieldCheck className="w-5 h-5" />
-          </div>
+        <div className="flex items-center gap-2.5">
+          <img
+            src="/app-icon.png"
+            alt="TrackCraft Icon"
+            className="w-9 h-9 rounded-xl border border-indigo-500/40 shadow-glow object-cover"
+          />
           <span className="text-lg font-black tracking-tight bg-gradient-to-r from-white via-slate-200 to-indigo-300 bg-clip-text text-transparent hidden sm:inline-block">
             TrackCraft
           </span>

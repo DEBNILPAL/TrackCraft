@@ -1,0 +1,29 @@
+[
+  {
+    "id": "act_01",
+    "projectId": "proj_smart_ai_01",
+    "userId": "user_debnil_01",
+    "userName": "Debnil Paul",
+    "action": "created project \"Smart AI Assistant Hub\"",
+    "details": "Project initial status set to Development.",
+    "createdAt": "2026-08-25T12:34:03.583Z"
+  },
+  {
+    "id": "act_02",
+    "projectId": "proj_smart_ai_01",
+    "userId": "user_rahul_02",
+    "userName": "Rahul Sharma",
+    "action": "joined project using project password",
+    "details": "Assigned role: Backend Developer.",
+    "createdAt": "2026-08-26T12:34:03.584Z"
+  },
+  {
+    "id": "act_03",
+    "projectId": "proj_smart_ai_01",
+    "userId": "user_debnil_01",
+    "userName": "Debnil Paul",
+    "action": "updated Frontend progress to 80%",
+    "details": "Completed password prompt modal and glassmorphism styling.",
+    "createdAt": "2026-08-28T12:34:03.586Z"
+  }
+]

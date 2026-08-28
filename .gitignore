@@ -17,7 +17,7 @@ out/
 # Backend runtime files
 backend/uploads/*
 !backend/uploads/.gitkeep
-backend/data/*.json
+# backend/data/*.json
 !backend/data/seed_sample.json
 
 # Logs

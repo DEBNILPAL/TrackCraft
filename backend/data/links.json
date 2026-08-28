@@ -1,0 +1,24 @@
+[
+  {
+    "id": "link_01",
+    "projectId": "proj_smart_ai_01",
+    "title": "Gemini API Reference Documentation",
+    "url": "https://ai.google.dev/docs",
+    "description": "Official API reference guide for Google Gemini model integration.",
+    "category": "API",
+    "addedBy": "user_debnil_01",
+    "addedByName": "Debnil Paul",
+    "createdAt": "2026-08-28T12:34:03.581Z"
+  },
+  {
+    "id": "link_02",
+    "projectId": "proj_smart_ai_01",
+    "title": "GitHub Project Repository",
+    "url": "https://github.com/example/project-progress-tracker",
+    "description": "Team GitHub monorepo containing frontend and backend code.",
+    "category": "GitHub",
+    "addedBy": "user_rahul_02",
+    "addedByName": "Rahul Sharma",
+    "createdAt": "2026-08-28T12:34:03.581Z"
+  }
+]

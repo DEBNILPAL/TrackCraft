@@ -1,0 +1,28 @@
+[
+  {
+    "id": "doc_arch_01",
+    "projectId": "proj_smart_ai_01",
+    "name": "Smart Assistant System Architecture Diagram",
+    "description": "High-level component flow diagram depicting React SPA frontend communicating with Express REST API and JSON atomic persistence layer.",
+    "fileUrl": "https://raw.githubusercontent.com/mermaid-js/mermaid/develop/docs/img/header-bg.png",
+    "fileType": "image/png",
+    "fileSize": 452000,
+    "isArchitectureDiagram": true,
+    "uploadedBy": "user_ananya_03",
+    "uploadedByName": "Ananya Gupta",
+    "uploadedAt": "2026-08-28T12:34:03.578Z"
+  },
+  {
+    "id": "doc_manual_02",
+    "projectId": "proj_smart_ai_01",
+    "name": "Project Requirement Specifications & API Contracts.pdf",
+    "description": "Comprehensive specifications detailing endpoint signatures, JSON schemas, and authorization rules.",
+    "fileUrl": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
+    "fileType": "application/pdf",
+    "fileSize": 1240000,
+    "isArchitectureDiagram": false,
+    "uploadedBy": "user_debnil_01",
+    "uploadedByName": "Debnil Paul",
+    "uploadedAt": "2026-08-28T12:34:03.578Z"
+  }
+]

@@ -1,0 +1,75 @@
+[
+  {
+    "id": "proj_smart_ai_01",
+    "name": "Smart AI Assistant Hub",
+    "description": "Autonomous multi-agent assistant suite built for real-time query resolution and team workflow automation.",
+    "passwordHash": "$2a$10$rZPy.Vwk2FrTgwrLRpGJRuh6RG4I6xq/bBHPeAk4fuFf/XthvibNW",
+    "ownerId": "user_debnil_01",
+    "status": "Development",
+    "startDate": "2026-08-20",
+    "expectedEndDate": "2026-09-05",
+    "hackathon": {
+      "name": "Global AI Innovators Hackathon 2026",
+      "organizer": "TechCorp International",
+      "startDate": "2026-08-25",
+      "endDate": "2026-08-30",
+      "registrationDeadline": "2026-08-24",
+      "submissionDeadline": "2026-08-30T18:00:00Z",
+      "presentationDate": "2026-08-31",
+      "notes": "Final presentation requires 3-minute video pitch and live GitHub repository link."
+    },
+    "techStack": {
+      "frontend": "React + TypeScript + Tailwind CSS",
+      "backend": "Node.js + Express + Socket.IO",
+      "ai": "Gemini 1.5 Pro API",
+      "database": "JSON Atomic Filesystem Storage",
+      "deployment": "Netlify + Render"
+    },
+    "logoUrl": "https://api.dicebear.com/7.x/identicon/svg?seed=SmartAIAssistant",
+    "createdAt": "2026-08-28T12:34:03.556Z",
+    "updatedAt": "2026-08-28T12:34:03.556Z"
+  },
+  {
+    "id": "proj_cloud_logistics_02",
+    "name": "Cloud Logistics Tracker",
+    "description": "Real-time supply chain monitoring platform featuring automated route recalculation and IoT sensor telemetry.",
+    "passwordHash": "$2a$10$rZPy.Vwk2FrTgwrLRpGJRuh6RG4I6xq/bBHPeAk4fuFf/XthvibNW",
+    "ownerId": "user_rahul_02",
+    "status": "Active",
+    "startDate": "2026-08-15",
+    "expectedEndDate": "2026-09-20",
+    "techStack": {
+      "frontend": "Vite React",
+      "backend": "Express Microservices",
+      "database": "Redis + JSON",
+      "deployment": "Render Cloud Platform"
+    },
+    "logoUrl": "https://api.dicebear.com/7.x/identicon/svg?seed=CloudLogistics",
+    "createdAt": "2026-08-28T12:34:03.557Z",
+    "updatedAt": "2026-08-28T12:34:03.557Z"
+  },
+  {
+    "id": "proj_1787920726235_ahuo9",
+    "name": "SIH_PS_91",
+    "description": "For Smart India Hackathonl.",
+    "passwordHash": "$2a$10$d1h5l.z0RqwuCRQMcDWzfOmx8j/kYnK.Bo7P/836NiZq52mgV6TL6",
+    "ownerId": "user_1787920585358_awym1",
+    "status": "Active",
+    "startDate": "2026-08-28",
+    "expectedEndDate": "2026-10-30",
+    "hackathon": {
+      "name": "SIH",
+      "organizer": "Govt. Of India",
+      "submissionDeadline": "2026-12-20T23:59",
+      "presentationDate": "2026-09-10"
+    },
+    "techStack": {
+      "frontend": "",
+      "backend": "",
+      "ai": ""
+    },
+    "logoUrl": "https://api.dicebear.com/7.x/identicon/svg?seed=SIH_PS_91",
+    "createdAt": "2026-08-28T12:38:46.236Z",
+    "updatedAt": "2026-08-28T12:38:46.236Z"
+  }
+]

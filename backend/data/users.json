@@ -1,0 +1,42 @@
+[
+  {
+    "id": "user_debnil_01",
+    "fullName": "Debnil Paul",
+    "email": "debnil@example.com",
+    "phone": "+1 555 0192",
+    "passwordHash": "$2a$10$dmTYcRI0YMlNpTtm71fb.eUoJUR2nfBxGMNawdOa/Fla4WUb1D3VO",
+    "avatarUrl": "https://api.dicebear.com/7.x/avataaars/svg?seed=Debnil",
+    "createdAt": "2026-08-28T12:34:03.549Z",
+    "updatedAt": "2026-08-28T12:34:03.550Z"
+  },
+  {
+    "id": "user_rahul_02",
+    "fullName": "Rahul Sharma",
+    "email": "rahul@example.com",
+    "phone": "+1 555 0184",
+    "passwordHash": "$2a$10$dmTYcRI0YMlNpTtm71fb.eUoJUR2nfBxGMNawdOa/Fla4WUb1D3VO",
+    "avatarUrl": "https://api.dicebear.com/7.x/avataaars/svg?seed=Rahul",
+    "createdAt": "2026-08-28T12:34:03.550Z",
+    "updatedAt": "2026-08-28T12:34:03.550Z"
+  },
+  {
+    "id": "user_ananya_03",
+    "fullName": "Ananya Gupta",
+    "email": "ananya@example.com",
+    "phone": "+1 555 0133",
+    "passwordHash": "$2a$10$dmTYcRI0YMlNpTtm71fb.eUoJUR2nfBxGMNawdOa/Fla4WUb1D3VO",
+    "avatarUrl": "https://api.dicebear.com/7.x/avataaars/svg?seed=Ananya",
+    "createdAt": "2026-08-28T12:34:03.550Z",
+    "updatedAt": "2026-08-28T12:34:03.550Z"
+  },
+  {
+    "id": "user_1787920585358_awym1",
+    "fullName": "Debnil Pal",
+    "email": "debnilpal075@gmail.com",
+    "phone": "",
+    "passwordHash": "$2a$10$vzZmP1zrMP0gFeKhBuxf3u9FXtY6vnP/0/klFGP6gKy4KNcCIUdYa",
+    "avatarUrl": "https://api.dicebear.com/7.x/avataaars/svg?seed=Debnil%20Pal",
+    "createdAt": "2026-08-28T12:36:25.358Z",
+    "updatedAt": "2026-08-28T12:36:25.358Z"
+  }
+]

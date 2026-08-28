@@ -1,0 +1,38 @@
+[
+  {
+    "id": "msg_01",
+    "projectId": "proj_smart_ai_01",
+    "userId": "user_debnil_01",
+    "userName": "Debnil Paul",
+    "userAvatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Debnil",
+    "content": "Hey team! I just updated the frontend progress to 80%. Password protection modal works smoothly.",
+    "createdAt": "2026-08-28T10:34:03.571Z"
+  },
+  {
+    "id": "msg_02",
+    "projectId": "proj_smart_ai_01",
+    "userId": "user_rahul_02",
+    "userName": "Rahul Sharma",
+    "userAvatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Rahul",
+    "content": "Great job Debnil! The REST API routes for role progress breakdowns and meetings are online.",
+    "createdAt": "2026-08-28T11:34:03.571Z"
+  },
+  {
+    "id": "msg_03",
+    "projectId": "proj_smart_ai_01",
+    "userId": "user_ananya_03",
+    "userName": "Ananya Gupta",
+    "userAvatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Ananya",
+    "content": "Awesome! I uploaded our system architecture diagram PDF in the Docs tab for review.",
+    "createdAt": "2026-08-28T12:04:03.574Z"
+  },
+  {
+    "id": "msg_1787920749957_2qyie",
+    "projectId": "proj_1787920726235_ahuo9",
+    "userId": "user_1787920585358_awym1",
+    "userName": "Debnil Pal",
+    "userAvatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Debnil%20Pal",
+    "content": "hi",
+    "createdAt": "2026-08-28T12:39:09.957Z"
+  }
+]

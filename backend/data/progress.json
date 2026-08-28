@@ -1,0 +1,32 @@
+[
+  {
+    "id": "prog_01",
+    "projectId": "proj_smart_ai_01",
+    "userId": "user_debnil_01",
+    "userName": "Debnil Paul",
+    "role": "Frontend Developer",
+    "progressPercentage": 80,
+    "completedToday": "Completed glassmorphic dashboard components, project password prompt modal, and role progress bars.",
+    "currentlyWorkingOn": "Integrating real-time Socket.IO chat UI widget.",
+    "blockers": "None",
+    "blockerStatus": "None",
+    "nextSteps": "Finalize settings page and dark theme toggle animations.",
+    "date": "2026-08-28",
+    "createdAt": "2026-08-28T12:34:03.568Z"
+  },
+  {
+    "id": "prog_02",
+    "projectId": "proj_smart_ai_01",
+    "userId": "user_rahul_02",
+    "userName": "Rahul Sharma",
+    "role": "Backend Developer",
+    "progressPercentage": 65,
+    "completedToday": "Implemented atomic JSON file locking repository and Express JWT auth routes.",
+    "currentlyWorkingOn": "Optimizing Socket.IO fallback handlers for Render backend deployment.",
+    "blockers": "CORS header verification on cross-domain preflight options.",
+    "blockerStatus": "Needs Help",
+    "nextSteps": "Verify Multer file upload limits for PDF architecture files.",
+    "date": "2026-08-28",
+    "createdAt": "2026-08-28T12:34:03.568Z"
+  }
+]

@@ -1,0 +1,47 @@
+[
+  {
+    "id": "mem_01",
+    "projectId": "proj_smart_ai_01",
+    "userId": "user_debnil_01",
+    "role": "Frontend Developer",
+    "currentProgress": 80,
+    "joinedAt": "2026-08-28T12:34:03.560Z",
+    "updatedAt": "2026-08-28T12:34:03.560Z"
+  },
+  {
+    "id": "mem_02",
+    "projectId": "proj_smart_ai_01",
+    "userId": "user_rahul_02",
+    "role": "Backend Developer",
+    "currentProgress": 65,
+    "joinedAt": "2026-08-28T12:34:03.560Z",
+    "updatedAt": "2026-08-28T12:34:03.560Z"
+  },
+  {
+    "id": "mem_03",
+    "projectId": "proj_smart_ai_01",
+    "userId": "user_ananya_03",
+    "role": "ML Developer",
+    "currentProgress": 50,
+    "joinedAt": "2026-08-28T12:34:03.560Z",
+    "updatedAt": "2026-08-28T12:34:03.560Z"
+  },
+  {
+    "id": "mem_04",
+    "projectId": "proj_cloud_logistics_02",
+    "userId": "user_rahul_02",
+    "role": "Project Manager",
+    "currentProgress": 40,
+    "joinedAt": "2026-08-28T12:34:03.560Z",
+    "updatedAt": "2026-08-28T12:34:03.560Z"
+  },
+  {
+    "id": "mem_1787920726238_l8nd7",
+    "projectId": "proj_1787920726235_ahuo9",
+    "userId": "user_1787920585358_awym1",
+    "role": "Project Manager",
+    "currentProgress": 0,
+    "joinedAt": "2026-08-28T12:38:46.238Z",
+    "updatedAt": "2026-08-28T12:38:46.238Z"
+  }
+]
