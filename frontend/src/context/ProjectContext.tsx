@@ -11,6 +11,8 @@ interface ProjectContextType {
   fetchProjects: () => Promise<void>;
   fetchProjectById: (id: string) => Promise<Project | null>;
   joinProject: (projectId: string, password: string, role?: string) => Promise<boolean>;
+  deleteProject: (projectId: string) => Promise<boolean>;
+  removeMember: (projectId: string, memberUserId: string) => Promise<boolean>;
   setActiveProject: (project: Project | null) => void;
   // Password modal trigger state
   lockedProjectToJoin: Project | null;
@@ -72,6 +74,36 @@ export const ProjectProvider: React.FC<{ children: React.ReactNode }> = ({ child
     }
   };
 
+  const deleteProject = async (projectId: string): Promise<boolean> => {
+    try {
+      const res = await api.delete(`/projects/${projectId}`);
+      if (res.data.success) {
+        await fetchProjects();
+        if (activeProject?.id === projectId) {
+          setActiveProject(null);
+        }
+        return true;
+      }
+      return false;
+    } catch (err: any) {
+      throw new Error(err.response?.data?.message || 'Failed to delete project');
+    }
+  };
+
+  const removeMember = async (projectId: string, memberUserId: string): Promise<boolean> => {
+    try {
+      const res = await api.delete(`/projects/${projectId}/members/${memberUserId}`);
+      if (res.data.success) {
+        await fetchProjects();
+        await fetchProjectById(projectId);
+        return true;
+      }
+      return false;
+    } catch (err: any) {
+      throw new Error(err.response?.data?.message || 'Failed to remove member');
+    }
+  };
+
   return (
     <ProjectContext.Provider
       value={{
@@ -82,6 +114,8 @@ export const ProjectProvider: React.FC<{ children: React.ReactNode }> = ({ child
         fetchProjects,
         fetchProjectById,
         joinProject,
+        deleteProject,
+        removeMember,
         setActiveProject,
         lockedProjectToJoin,
         setLockedProjectToJoin,

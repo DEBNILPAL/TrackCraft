@@ -40,8 +40,8 @@ export const LoginPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col justify-center py-12 sm:px-6 lg:px-8 relative bg-grid-pattern">
-      <div className="absolute top-8 left-8">
+    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col justify-center py-6 sm:py-12 px-4 sm:px-6 lg:px-8 relative bg-grid-pattern">
+      <div className="mb-6 sm:mb-0 sm:absolute sm:top-8 sm:left-8">
         <Link to="/" className="inline-flex items-center gap-2 text-xs font-semibold text-slate-400 hover:text-white transition-colors">
           <ArrowLeft className="w-4 h-4" /> Back to Home
         </Link>
@@ -51,12 +51,12 @@ export const LoginPage: React.FC = () => {
         <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-indigo-600 to-purple-500 flex items-center justify-center font-bold text-white shadow-glow mx-auto mb-4">
           <ShieldCheck className="w-7 h-7" />
         </div>
-        <h2 className="text-3xl font-extrabold tracking-tight text-slate-100">Welcome back</h2>
-        <p className="mt-2 text-sm text-slate-400">Sign in to your TrackCraft workspace</p>
+        <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-100">Welcome back</h2>
+        <p className="mt-1.5 sm:mt-2 text-xs sm:text-sm text-slate-400">Sign in to your TrackCraft workspace</p>
       </div>
 
-      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md px-4 sm:px-0">
-        <div className="glass-panel p-8 rounded-3xl border border-slate-800 shadow-2xl">
+      <div className="mt-6 sm:mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+        <div className="glass-panel p-5 sm:p-8 rounded-2xl sm:rounded-3xl border border-slate-800 shadow-2xl">
           <form onSubmit={handleSubmit} className="space-y-5">
             {error && (
               <div className="p-3.5 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs font-medium">

@@ -29,15 +29,22 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, onOpenPasswor
         {/* Top Badges */}
         <div className="flex items-center justify-between mb-4">
           <Badge status={project.status} size="sm" />
-          {project.isMember ? (
-            <span className="inline-flex items-center gap-1 text-xs font-semibold text-emerald-400 bg-emerald-500/10 px-2.5 py-0.5 rounded-full border border-emerald-500/20">
-              <CheckCircle2 className="w-3.5 h-3.5" /> Joined
-            </span>
-          ) : (
-            <span className="inline-flex items-center gap-1 text-xs font-semibold text-amber-400 bg-amber-500/10 px-2.5 py-0.5 rounded-full border border-amber-500/20 shadow-glow">
-              <Lock className="w-3.5 h-3.5" /> Protected Project
-            </span>
-          )}
+          <div className="flex items-center gap-1.5">
+            {project.isOwner && (
+              <span className="inline-flex items-center text-[10px] font-bold text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded-full border border-amber-500/20">
+                Owner
+              </span>
+            )}
+            {project.isMember ? (
+              <span className="inline-flex items-center gap-1 text-xs font-semibold text-emerald-400 bg-emerald-500/10 px-2.5 py-0.5 rounded-full border border-emerald-500/20">
+                <CheckCircle2 className="w-3.5 h-3.5" /> Joined
+              </span>
+            ) : (
+              <span className="inline-flex items-center gap-1 text-xs font-semibold text-amber-400 bg-amber-500/10 px-2.5 py-0.5 rounded-full border border-amber-500/20 shadow-glow">
+                <Lock className="w-3.5 h-3.5" /> Protected Project
+              </span>
+            )}
+          </div>
         </div>
 
         {/* Project Header & Icon */}

@@ -17,7 +17,22 @@ export const Footer: React.FC = () => {
         </div>
 
         <div className="flex items-center gap-6 text-slate-400">
-          <a href="#features" className="hover:text-slate-200 transition-colors">Features</a>
+          <button
+            onClick={() => {
+              const el = document.getElementById('features');
+              if (el) {
+                el.scrollIntoView({ behavior: 'smooth' });
+              } else {
+                window.location.hash = '#/';
+                setTimeout(() => {
+                  document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' });
+                }, 100);
+              }
+            }}
+            className="hover:text-slate-200 transition-colors"
+          >
+            Features
+          </button>
           <Link to="/how-it-works" className="hover:text-slate-200 transition-colors">Workflow & How It Works</Link>
           <Link to="/login" className="hover:text-slate-200 transition-colors">Login</Link>
           <Link to="/signup" className="hover:text-slate-200 transition-colors">Sign Up</Link>

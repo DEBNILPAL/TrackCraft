@@ -8,6 +8,14 @@ import { Footer } from '../components/landing/Footer';
 import { Button } from '../components/common/Button';
 
 export const LandingPage: React.FC = () => {
+  const scrollToFeatures = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const el = document.getElementById('features');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col selection:bg-indigo-500 selection:text-white">
       {/* Landing Navbar */}
@@ -24,21 +32,41 @@ export const LandingPage: React.FC = () => {
         </div>
 
         <nav className="hidden md:flex items-center gap-8 text-xs font-semibold text-slate-300">
-          <a href="#features" className="hover:text-white transition-colors">Features</a>
+          <button onClick={scrollToFeatures} className="hover:text-white transition-colors">
+            Features
+          </button>
           <Link to="/how-it-works" className="hover:text-white transition-colors">How It Works</Link>
         </nav>
 
-        <div className="flex items-center gap-3">
-          <Link to="/login">
-            <Button variant="ghost" size="md" icon={LogIn}>
-              Sign In
-            </Button>
-          </Link>
-          <Link to="/signup">
-            <Button variant="glow" size="md" icon={UserPlus}>
-              Start For Free
-            </Button>
-          </Link>
+        <div className="flex items-center gap-2 sm:gap-3">
+          {/* Desktop & Tablet Navigation Buttons */}
+          <div className="hidden sm:flex items-center gap-3">
+            <Link to="/login">
+              <Button variant="ghost" size="md" icon={LogIn}>
+                Sign In
+              </Button>
+            </Link>
+            <Link to="/signup">
+              <Button variant="glow" size="md" icon={UserPlus}>
+                Start For Free
+              </Button>
+            </Link>
+          </div>
+
+          {/* Mobile Phone Only: Sleek Sign In Icon Button */}
+          <div className="sm:hidden">
+            <Link to="/login">
+              <Button
+                variant="glow"
+                size="sm"
+                icon={LogIn}
+                className="!p-2.5 !rounded-xl shadow-glow"
+                title="Sign In"
+              >
+                <span className="text-xs font-bold ml-1">Sign In</span>
+              </Button>
+            </Link>
+          </div>
         </div>
       </header>
 

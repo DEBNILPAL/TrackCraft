@@ -11,3 +11,12 @@ services:
         generateValue: true
       - key: FRONTEND_URL
         sync: false
+      - key: DATA_DIR
+        value: ./data
+      - key: UPLOAD_DIR
+        value: ./uploads
+    disk:
+      name: tracker-json-storage
+      mountPath: /opt/render/project/src/backend/data
+      sizeGB: 1
+

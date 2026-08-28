@@ -1,9 +1,8 @@
 import fs from 'fs';
 import path from 'path';
+import { CONFIG } from '../config';
 
-const DATA_DIR = process.env.DATA_DIR 
-  ? path.resolve(process.env.DATA_DIR) 
-  : path.resolve(__dirname, '../../data');
+const DATA_DIR = CONFIG.DATA_DIR;
 
 // Ensure data directory exists
 if (!fs.existsSync(DATA_DIR)) {

@@ -1,11 +1,33 @@
 import bcrypt from 'bcryptjs';
 import { JsonStorage } from '../storage/jsonStorage';
-import { Project, Membership, UserRole, ProjectStatus, UserSanitized, TechStack, HackathonInfo } from '../types';
+import {
+  Project,
+  Membership,
+  UserRole,
+  ProjectStatus,
+  UserSanitized,
+  TechStack,
+  HackathonInfo,
+  ProgressLog,
+  ChatMessage,
+  Meeting,
+  DocumentItem,
+  ReferenceLink,
+  ActivityItem,
+  NotificationItem,
+} from '../types';
 import { AuthService } from './authService';
 import { NotificationService } from './notificationService';
 
 const projectStorage = new JsonStorage<Project>('projects');
 const membershipStorage = new JsonStorage<Membership>('memberships');
+const progressStorage = new JsonStorage<ProgressLog>('progress');
+const chatStorage = new JsonStorage<ChatMessage>('messages');
+const meetingStorage = new JsonStorage<Meeting>('meetings');
+const documentStorage = new JsonStorage<DocumentItem>('documents');
+const linkStorage = new JsonStorage<ReferenceLink>('links');
+const activityStorage = new JsonStorage<ActivityItem>('activity');
+const notificationStorage = new JsonStorage<NotificationItem>('notifications');
 
 export class ProjectService {
   /**
@@ -253,4 +275,87 @@ export class ProjectService {
     const { passwordHash, ...sanitized } = updated;
     return sanitized;
   }
+
+  /**
+   * Delete Project (Project Manager or Project Owner only)
+   * Cleans up all associated JSON databases (memberships, progress, messages, meetings, documents, links, activity, notifications)
+   */
+  static deleteProject(projectId: string, userId: string): boolean {
+    const proj = projectStorage.getById(projectId);
+    if (!proj) {
+      throw new Error('Project not found');
+    }
+
+    const memberships = membershipStorage.filter((m) => m.projectId === projectId && m.userId === userId);
+    const userRole = memberships[0]?.role;
+    const isOwner = proj.ownerId === userId;
+    const isProjectManager = isOwner || userRole === 'Project Manager';
+
+    if (!isProjectManager) {
+      throw new Error('Access denied: Only a Project Manager or Project Owner can delete this project');
+    }
+
+    // Perform atomic cascading delete across all JSON databases
+    projectStorage.delete(projectId);
+    membershipStorage.deleteMany((m) => m.projectId === projectId);
+    progressStorage.deleteMany((p) => p.projectId === projectId);
+    chatStorage.deleteMany((c) => c.projectId === projectId);
+    meetingStorage.deleteMany((m) => m.projectId === projectId);
+    documentStorage.deleteMany((d) => d.projectId === projectId);
+    linkStorage.deleteMany((l) => l.projectId === projectId);
+    activityStorage.deleteMany((a) => a.projectId === projectId);
+    notificationStorage.deleteMany((n) => n.projectId === projectId);
+
+    return true;
+  }
+
+  /**
+   * Remove a member from the project (Project Manager / Owner only, or user leaving project)
+   */
+  static removeMember(projectId: string, requestingUserId: string, targetUserId: string): boolean {
+    const proj = projectStorage.getById(projectId);
+    if (!proj) {
+      throw new Error('Project not found');
+    }
+
+    if (targetUserId === proj.ownerId) {
+      throw new Error('The Project Owner cannot be removed from the team. Delete the project instead if you want to remove it.');
+    }
+
+    const reqMemberships = membershipStorage.filter((m) => m.projectId === projectId && m.userId === requestingUserId);
+    if (reqMemberships.length === 0) {
+      throw new Error('Access denied: You are not a member of this project');
+    }
+
+    const isPM = proj.ownerId === requestingUserId || reqMemberships[0].role === 'Project Manager';
+    const isSelfRemoval = requestingUserId === targetUserId;
+
+    if (!isPM && !isSelfRemoval) {
+      throw new Error('Access denied: Only a Project Manager can remove team members');
+    }
+
+    const targetMemberships = membershipStorage.filter((m) => m.projectId === projectId && m.userId === targetUserId);
+    if (targetMemberships.length === 0) {
+      throw new Error('Member not found in this project');
+    }
+
+    membershipStorage.delete(targetMemberships[0].id);
+
+    // Record activity log
+    const reqUser = AuthService.getUserById(requestingUserId);
+    const targetUser = AuthService.getUserById(targetUserId);
+    const actionMsg = isSelfRemoval ? 'left the project team' : `removed ${targetUser?.fullName || 'a member'} from the team`;
+
+    activityStorage.insert({
+      id: `act_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`,
+      projectId,
+      userId: requestingUserId,
+      userName: reqUser?.fullName || 'User',
+      action: actionMsg,
+      createdAt: new Date().toISOString(),
+    });
+
+    return true;
+  }
 }
+

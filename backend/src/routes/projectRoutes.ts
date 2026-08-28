@@ -133,4 +133,30 @@ router.put('/:id', authenticateToken, requireProjectMembership, (req: Authentica
   }
 });
 
+// DELETE /api/projects/:id - Delete project (Project Manager / Owner only)
+router.delete('/:id', authenticateToken, requireProjectMembership, (req: AuthenticatedRequest, res: Response) => {
+  try {
+    const projectId = req.params.id;
+    const userId = req.user!.id;
+    ProjectService.deleteProject(projectId, userId);
+    return res.status(200).json({ success: true, message: 'Project deleted successfully' });
+  } catch (error: any) {
+    return res.status(400).json({ success: false, message: error.message || 'Failed to delete project' });
+  }
+});
+
+// DELETE /api/projects/:id/members/:userId - Remove member from project
+router.delete('/:id/members/:userId', authenticateToken, requireProjectMembership, (req: AuthenticatedRequest, res: Response) => {
+  try {
+    const projectId = req.params.id;
+    const targetUserId = req.params.userId;
+    const requestingUserId = req.user!.id;
+    ProjectService.removeMember(projectId, requestingUserId, targetUserId);
+    return res.status(200).json({ success: true, message: 'Member removed from project successfully' });
+  } catch (error: any) {
+    return res.status(400).json({ success: false, message: error.message || 'Failed to remove member' });
+  }
+});
+
 export default router;
+
