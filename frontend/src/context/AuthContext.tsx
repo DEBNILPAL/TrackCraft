@@ -23,19 +23,39 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   useEffect(() => {
     const initAuth = async () => {
       const storedToken = localStorage.getItem('tracker_token');
+      const storedUserStr = localStorage.getItem('tracker_user');
+
       if (storedToken) {
         try {
           const res = await api.get('/auth/me');
           if (res.data.success) {
             setUser(res.data.data.user);
             setToken(storedToken);
+            localStorage.setItem('tracker_user', JSON.stringify(res.data.data.user));
             connectSocket();
           } else {
             logout();
           }
-        } catch (err) {
+        } catch (err: any) {
           console.error('Session verify error:', err);
-          logout();
+          // Only force logout if server explicitly returns 401 Unauthorized or 403 Forbidden
+          if (err.response && (err.response.status === 401 || err.response.status === 403)) {
+            logout();
+          } else {
+            // Server cold start / reboot / deployment: retain cached user session
+            if (storedUserStr) {
+              try {
+                const cachedUser = JSON.parse(storedUserStr);
+                setUser(cachedUser);
+                setToken(storedToken);
+                connectSocket();
+              } catch {
+                logout();
+              }
+            } else {
+              setToken(storedToken);
+            }
+          }
         }
       }
       setIsLoading(false);

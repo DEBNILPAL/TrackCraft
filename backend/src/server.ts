@@ -46,7 +46,10 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Serve Uploaded Files
+// Ensure data & upload directories exist
+if (!fs.existsSync(CONFIG.DATA_DIR)) {
+  fs.mkdirSync(CONFIG.DATA_DIR, { recursive: true });
+}
 if (!fs.existsSync(CONFIG.UPLOAD_DIR)) {
   fs.mkdirSync(CONFIG.UPLOAD_DIR, { recursive: true });
 }
@@ -90,9 +93,9 @@ app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
   });
 });
 
-// Check if seed data exists; if not, automatically seed initial demo data
+// Check if seed data exists; if not, automatically seed initial demo data on fresh deployment
 const usersFile = path.join(CONFIG.DATA_DIR, 'users.json');
-if (!fs.existsSync(usersFile) || fs.readFileSync(usersFile, 'utf-8').trim() === '[]') {
+if (!fs.existsSync(usersFile)) {
   seedDatabase().catch((err) => console.error('Failed to initialize seed database:', err));
 }
 

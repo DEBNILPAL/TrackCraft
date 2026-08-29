@@ -12,9 +12,9 @@ services:
       - key: FRONTEND_URL
         sync: false
       - key: DATA_DIR
-        value: ./data
+        value: /opt/render/project/src/backend/data
       - key: UPLOAD_DIR
-        value: ./uploads
+        value: /opt/render/project/src/backend/data/uploads
     disk:
       name: tracker-json-storage
       mountPath: /opt/render/project/src/backend/data

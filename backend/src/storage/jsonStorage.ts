@@ -2,13 +2,6 @@ import fs from 'fs';
 import path from 'path';
 import { CONFIG } from '../config';
 
-const DATA_DIR = CONFIG.DATA_DIR;
-
-// Ensure data directory exists
-if (!fs.existsSync(DATA_DIR)) {
-  fs.mkdirSync(DATA_DIR, { recursive: true });
-}
-
 export type EntityName = 
   | 'users'
   | 'projects'
@@ -22,48 +15,118 @@ export type EntityName =
   | 'activity';
 
 /**
- * Generic Storage Repository for JSON persistent storage
+ * Generic Storage Repository for JSON persistent storage with atomic writes & backup recovery
  */
 export class JsonStorage<T extends { id: string }> {
   private filePath: string;
+  private backupPath: string;
 
   constructor(private entity: EntityName) {
-    this.filePath = path.join(DATA_DIR, `${this.entity}.json`);
+    this.ensureDirectoryExists();
+    this.filePath = path.join(CONFIG.DATA_DIR, `${this.entity}.json`);
+    this.backupPath = path.join(CONFIG.DATA_DIR, `${this.entity}.json.bak`);
     this.ensureFileExists();
   }
 
+  private ensureDirectoryExists(): void {
+    if (!fs.existsSync(CONFIG.DATA_DIR)) {
+      fs.mkdirSync(CONFIG.DATA_DIR, { recursive: true });
+    }
+  }
+
   private ensureFileExists(): void {
+    this.ensureDirectoryExists();
+
     if (!fs.existsSync(this.filePath)) {
+      // Check if backup exists to restore from
+      if (fs.existsSync(this.backupPath)) {
+        try {
+          fs.copyFileSync(this.backupPath, this.filePath);
+          console.log(`[JsonStorage] Restored ${this.entity}.json from backup file.`);
+          return;
+        } catch (err) {
+          console.error(`[JsonStorage] Failed to restore ${this.entity}.json from backup:`, err);
+        }
+      }
+      // Initialize with empty array
       fs.writeFileSync(this.filePath, JSON.stringify([], null, 2), 'utf-8');
     }
   }
 
   /**
-   * Reads all items from the JSON file
+   * Reads all items from the JSON file with backup auto-recovery
    */
   public getAll(): T[] {
+    this.ensureFileExists();
     try {
-      this.ensureFileExists();
       const content = fs.readFileSync(this.filePath, 'utf-8');
-      return JSON.parse(content || '[]') as T[];
+      if (!content || !content.trim()) {
+        return [];
+      }
+      return JSON.parse(content) as T[];
     } catch (error) {
-      console.error(`Error reading ${this.entity}.json:`, error);
+      console.error(`[JsonStorage] Error reading primary ${this.entity}.json:`, error);
+      
+      // Attempt recovery from backup
+      if (fs.existsSync(this.backupPath)) {
+        try {
+          const backupContent = fs.readFileSync(this.backupPath, 'utf-8');
+          if (backupContent && backupContent.trim()) {
+            const parsed = JSON.parse(backupContent) as T[];
+            // Auto-heal primary file using backup content
+            fs.writeFileSync(this.filePath, backupContent, 'utf-8');
+            console.log(`[JsonStorage] Successfully recovered ${this.entity}.json from backup!`);
+            return parsed;
+          }
+        } catch (backupErr) {
+          console.error(`[JsonStorage] Backup read error on ${this.entity}.json.bak:`, backupErr);
+        }
+      }
+
       return [];
     }
   }
 
   /**
-   * Safe atomic write operation
+   * Safe atomic write operation with automatic backup creation
    */
   public saveAll(items: T[]): void {
+    this.ensureDirectoryExists();
+    const dataString = JSON.stringify(items, null, 2);
+
+    // 1. Create a backup of existing valid file before writing new state
+    if (fs.existsSync(this.filePath)) {
+      try {
+        const currentContent = fs.readFileSync(this.filePath, 'utf-8');
+        if (currentContent && currentContent.trim()) {
+          fs.writeFileSync(this.backupPath, currentContent, 'utf-8');
+        }
+      } catch (err) {
+        console.warn(`[JsonStorage] Could not update backup for ${this.entity}:`, err);
+      }
+    }
+
+    // 2. Perform atomic write using temporary file
+    const tempPath = path.join(
+      CONFIG.DATA_DIR,
+      `${this.entity}_${Date.now()}_${Math.random().toString(36).substring(2, 6)}.tmp`
+    );
+
     try {
-      const tempPath = `${this.filePath}.tmp`;
-      fs.writeFileSync(tempPath, JSON.stringify(items, null, 2), 'utf-8');
-      fs.renameSync(tempPath, this.filePath);
+      fs.writeFileSync(tempPath, dataString, 'utf-8');
+      try {
+        fs.renameSync(tempPath, this.filePath);
+      } catch (renameErr) {
+        // Fallback for cross-device mounts / permission locks on cloud containers
+        fs.copyFileSync(tempPath, this.filePath);
+        if (fs.existsSync(tempPath)) {
+          fs.unlinkSync(tempPath);
+        }
+      }
     } catch (error) {
-      console.error(`Error saving to ${this.entity}.json:`, error);
-      // Fallback direct write
-      fs.writeFileSync(this.filePath, JSON.stringify(items, null, 2), 'utf-8');
+      console.error(`[JsonStorage] Error saving to ${this.entity}.json:`, error);
+      // Emergency direct write fallback
+      fs.writeFileSync(this.filePath, dataString, 'utf-8');
     }
   }
 
